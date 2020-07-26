@@ -72,7 +72,6 @@ const char INDEX_page[] PROGMEM = R"=====(
 <div class="container">
     <div class="form-container">
         <form action="/turn-furnace-off" method="POST">
-            <input class="formEl" type="password" name="password" placeholder="Hasło: "/><br/>
             <input class="formEl" type="submit" value="Wyłącz piec"/>
         </form>
     </div>

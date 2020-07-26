@@ -30,22 +30,12 @@ void redirect(const char* url) {
     server.send(302, "text/plain", "");
 }
 
-void unauthorizedPage();
-
 void homepagePage() {
     server.send(200, "text/html", INDEX_page);
 }
 
 /// Turns central heating furnace off. Redirects to homepage.
 void turn_furnace_off() {
-    // Check if password is correct, cause fuck my mom
-    const String password = server.arg("password");
-
-    if (password != "okmijnuhb") {
-        unauthorizedPage();
-        return;
-    }
-
     digitalWrite(FURNACE_ON_OFF_BTN, HIGH);
     digitalWrite(LED_BUILTIN, HIGH);
     delay(300);
@@ -54,10 +44,6 @@ void turn_furnace_off() {
 
 
     redirect("/");
-}
-
-void unauthorizedPage() {
-    server.send(403, "text/html", UNAUTHORIZED_page);
 }
 
 void notFoundPage() {
@@ -89,7 +75,6 @@ void setup() {
     Serial.println(WiFi.localIP());
 
     server.on("/", HTTP_GET, homepagePage);
-    server.on("/unauthorizedPage", HTTP_GET, unauthorizedPage);
     server.on("/turn-furnace-off", HTTP_POST, turn_furnace_off);
     server.onNotFound(notFoundPage);
 
