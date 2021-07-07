@@ -3,12 +3,12 @@
 #include "index.h"
 #include "notfound.h"
 #include "unathorized.h"
+#include "secrets.h"
 
-#define FURNACE_ON_OFF_BTN D0
+#define FURNACE_ON_OFF_BTN D2
 
 ESP8266WebServer server(80);
-IPAddress ip(192, 168, 8, 104);
-IPAddress gateway(192, 168, 8, 1);
+IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 bool isLEDOn = false;
@@ -64,9 +64,9 @@ void setup() {
 
     WiFi.disconnect();
     WiFi.setAutoConnect(true);
-    WiFi.config(ip, gateway, subnet);
+    WiFi.config(IP, gateway, subnet);
     WiFi.mode(WIFI_STA);
-    WiFi.begin("jan router trzeci laczy sieci", "qwerty12345");
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
 
     Serial.print("Connecting to WiFi");
